@@ -23,16 +23,54 @@
 ![](images/hash-functions-time.PNG)
 #### Хеш-фукции (затрачиваемая память, кБайт)
 ![](images/hash-functions-memory.PNG)
+
+Рассмотренные хеш-функции:
+* Gost R 34.11-94
+* MD2
+* MD4
+* MD5
+* SHA-1
+* SHA-224
+* SHA-256
+* SHA-384
+* SHA-512
+* Tiger
+* RIPEMD128
+* RIPEMD160
+* RIPEMD256
+* RIPEMD320
+* WhirlpoolDigest
 ### Цифровые подписи
 #### Цифровые подписи (время выполнения, миллисекунды)
 ![](images/sign-time.PNG)
 #### Цифровые подписи (затрачиваемая память, кБайт)
 ![](images/sign-memory.PNG)
+Рассмотренные алгоритмы цифровой подписи:
+* DSA
+* RSA
+* ECDSA
+
 ### Генераторы случаных чисел
 #### Генераторы случаных чисел (время выполнения, миллисекунды)
 ![](images/random-time.PNG)
 #### Генераторы случаных чисел (затрачиваемая память, кБайт)
 ![](images/random-memory.PNG)
+Генераторы случайных чисел на дайджестах со счетчиком:
+* Random generation based on Gost R 34.11-94
+* Random generation based on MD2
+* Random generation based on MD4
+* Random generation based on MD5
+* Random generation based on SHA-1
+* Random generation based on SHA-224
+* Random generation based on SHA-256
+* Random generation based on SHA-384
+* Random generation based on SHA-512
+* Random generation based on Tiger
+* Random generation based on RIPEMD128
+* Random generation based on RIPEMD160
+* Random generation based on RIPEMD256
+* Random generation based on RIPEMD320
+* Random generation based on WhirlpoolDigest
 
 ### Вспомогательные ссылки
 * [The Bouncy Castle FIPS Java API in 100 Examples (Final Draft)](https://www.bouncycastle.org/fips-java/BCFipsIn100.pdf)
