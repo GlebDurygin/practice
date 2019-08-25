@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
+        caption="msg://captionHash"
+        messagesPack="com.company.practice.web.screens">
+    <data>
+        <collection id="algorithmsDc"
+                    class="com.company.practice.entity.Algorithm"
+                    view="new-view">
+            <loader id="algorithmsDl">
+                <query>
+                    <![CDATA[select e from practice_Algorithm e where e.type = 1]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tabSheet">
+        <tabSheet id="tabSheet">
+            <tab id="timeTab" caption="msg://captionTime" spacing="true" expand="chartTime">
+                <chart:serialChart id="chartTime"
+                                   addClassNames="true"
+                                   autoMargins="false"
+                                   categoryField="info"
+                                   dataContainer="algorithmsDc"
+                                   marginBottom="26"
+                                   marginLeft="40"
+                                   marginRight="8"
+                                   marginTop="10"
+                                   startDuration="1"
+                                   theme="LIGHT"
+                                   width="100%"
+                                   caption="Hash functions (time, [ms])">
+                    <chart:valueAxes>
+                        <chart:axis axisAlpha="0"
+                                    position="LEFT"/>
+                    </chart:valueAxes>
+                    <chart:balloon adjustBorderColor="false"
+                                   color="WHITE"
+                                   horizontalPadding="10"
+                                   verticalPadding="8"/>
+                    <chart:graphs>
+                        <chart:graph
+                                balloonText="&lt;span style='font-size:12px;'&gt;[[title]] for [[info]] (ms):&lt;br&gt;
+                             &lt;span style='font-size:20px;'&gt;[[value]]&lt;/span&gt;&lt;/span&gt;"
+                                fillAlphas="1"
+                                title="Time"
+                                type="COLUMN"
+                                valueField="time"/>
+                    </chart:graphs>
+                    <chart:categoryAxis axisAlpha="0"
+                                        gridPosition="START"
+                                        tickLength="0"/>
+                    <chart:export/>
+                </chart:serialChart>
+            </tab>
+            <tab id="memoryTab" caption="msg://captionMemory" expand="chartMemory">
+                <chart:serialChart id="chartMemory"
+                                   addClassNames="true"
+                                   autoMargins="false"
+                                   categoryField="info"
+                                   dataContainer="algorithmsDc"
+                                   marginBottom="26"
+                                   marginLeft="40"
+                                   marginRight="8"
+                                   marginTop="10"
+                                   startDuration="1"
+                                   theme="LIGHT"
+                                   width="100%"
+                                   caption="Hash functions (memory, [kb])">
+                    <chart:valueAxes>
+                        <chart:axis axisAlpha="0"
+                                    position="LEFT"/>
+                    </chart:valueAxes>
+                    <chart:balloon adjustBorderColor="false"
+                                   color="WHITE"
+                                   horizontalPadding="10"
+                                   verticalPadding="8"/>
+                    <chart:graphs>
+                        <chart:graph
+                                balloonText="&lt;span style='font-size:12px;'&gt;[[title]] for [[info]] (kb):&lt;br&gt;
+                             &lt;span style='font-size:20px;'&gt;[[value]]&lt;/span&gt;&lt;/span&gt;"
+                                fillAlphas="1"
+                                title="Memory"
+                                type="COLUMN"
+                                valueField="memory"/>
+                    </chart:graphs>
+                    <chart:categoryAxis axisAlpha="0"
+                                        gridPosition="START"
+                                        tickLength="0"/>
+                    <chart:export/>
+                </chart:serialChart>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

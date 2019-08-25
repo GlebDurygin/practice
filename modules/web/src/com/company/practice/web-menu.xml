@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-practice" insertBefore="administration">
+        <item screen="practice_Algorithm.browse"/>
+        <item screen="practice_HashScreen"/>
+        <item screen="practice_RandomNumbersScreen"/>
+        <item screen="practice_SignatureScreen"/>
+    </menu>
+</menu-config>

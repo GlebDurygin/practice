@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gui="http://schemas.haulmont.com/cuba/spring/cuba-gui.xsd">
+
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.company.practice"/>
+    
+    <gui:screens base-packages="com.company.practice.web"/>
+    <bean id="practice_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="practice_ProcessService" value="com.company.practice.service.ProcessService"/>
+                <entry key="practice_HashService" value="com.company.practice.service.HashService"/>
+                <entry key="practice_SignerService" value="com.company.practice.service.SignerService"/>
+                <entry key="practice_RandomNumberService" value="com.company.practice.service.RandomNumberService"/>
+                <entry key="practice_VerifierService" value="com.company.practice.service.VerifierService"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

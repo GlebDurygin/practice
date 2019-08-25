@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.practice.web.screens.algorithm">
+    <data>
+        <instance id="algorithmDc"
+                  class="com.company.practice.entity.Algorithm"
+                  view="new-view">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="algorithmDc">
+            <column width="250px">
+                <textField id="nameField" property="name" enable="false"/>
+                <lookupField id="infoField" property="info"/>
+                <textField id="typeField" property="type" enable="false"/>
+                <textField id="timeField" property="time" enable="false"/>
+                <textField id="memoryField" property="memory" enable="false"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="refreshInfo" caption="msg://refreshInfo"/>
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
