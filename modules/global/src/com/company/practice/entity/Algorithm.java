@@ -23,10 +23,18 @@ public class Algorithm extends StandardEntity {
     protected String info;
 
     @Column(name = "TIME_")
-    protected Long time;
+    protected Double time;
 
     @Column(name = "MEMORY")
     protected Double memory;
+
+    public void setTime(Double time) {
+        this.time = time;
+    }
+
+    public Double getTime() {
+        return time;
+    }
 
     public AlgorithmType getType() {
         return type == null ? null : AlgorithmType.fromId(type);
@@ -34,14 +42,6 @@ public class Algorithm extends StandardEntity {
 
     public void setType(AlgorithmType type) {
         this.type = type == null ? null : type.getId();
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
-    }
-
-    public Long getTime() {
-        return time;
     }
 
     public void setMemory(Double memory) {

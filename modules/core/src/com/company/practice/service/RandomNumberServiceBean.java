@@ -12,57 +12,44 @@ public class RandomNumberServiceBean implements RandomNumberService {
     protected static final String TEST_VALUE = "HELLO world! It is a test value";
 
     @Override
-    public void run(Algorithm algorithm) {
+    public long run(Algorithm algorithm) {
         switch (algorithm.getInfo()) {
             case RANDOM_NUMBER_GOST3411:
-                generateNumber(new GOST3411Digest());
-                break;
+                return generateNumber(new GOST3411Digest());
             case RANDOM_NUMBER_MD2:
-                generateNumber(new MD2Digest());
-                break;
+                return generateNumber(new MD2Digest());
             case RANDOM_NUMBER_MD4:
-                generateNumber(new MD4Digest());
-                break;
+                return generateNumber(new MD4Digest());
             case RANDOM_NUMBER_MD5:
-                generateNumber(new MD5Digest());
-                break;
+                return generateNumber(new MD5Digest());
             case RANDOM_NUMBER_RIPEMD128:
-                generateNumber(new RIPEMD128Digest());
-                break;
+                return generateNumber(new RIPEMD128Digest());
             case RANDOM_NUMBER_RIPEMD160:
-                generateNumber(new RIPEMD160Digest());
-                break;
+                return generateNumber(new RIPEMD160Digest());
             case RANDOM_NUMBER_RIPEMD256:
-                generateNumber(new RIPEMD256Digest());
-                break;
+                return generateNumber(new RIPEMD256Digest());
             case RANDOM_NUMBER_RIPEMD320:
-                generateNumber(new RIPEMD320Digest());
-                break;
+                return generateNumber(new RIPEMD320Digest());
             case RANDOM_NUMBER_SHA1:
-                generateNumber(new SHA1Digest());
-                break;
+                return generateNumber(new SHA1Digest());
             case RANDOM_NUMBER_SHA224:
-                generateNumber(new SHA224Digest());
-                break;
+                return generateNumber(new SHA224Digest());
             case RANDOM_NUMBER_SHA256:
-                generateNumber(new SHA256Digest());
-                break;
+                return generateNumber(new SHA256Digest());
             case RANDOM_NUMBER_SHA384:
-                generateNumber(new SHA384Digest());
-                break;
+                return generateNumber(new SHA384Digest());
             case RANDOM_NUMBER_SHA512:
-                generateNumber(new SHA512Digest());
-                break;
+                return generateNumber(new SHA512Digest());
             case RANDOM_NUMBER_TIGER:
-                generateNumber(new TigerDigest());
-                break;
+                return generateNumber(new TigerDigest());
             case RANDOM_NUMBER_WHIRLPOOL:
-                generateNumber(new WhirlpoolDigest());
-                break;
+                return generateNumber(new WhirlpoolDigest());
+            default:
+                return 0;
         }
     }
 
-    protected void generateNumber(Digest digest) {
+    protected long generateNumber(Digest digest) {
         byte[] input = TEST_VALUE.getBytes();
         digest.update(input, 0, input.length);
         DigestRandomGenerator generator = new DigestRandomGenerator(digest);
@@ -72,5 +59,6 @@ public class RandomNumberServiceBean implements RandomNumberService {
             generator.nextBytes(output);
             count += output.length;
         }
+        return Runtime.getRuntime().freeMemory();
     }
 }

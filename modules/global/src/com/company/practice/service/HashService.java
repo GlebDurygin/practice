@@ -5,5 +5,5 @@ import com.company.practice.entity.Algorithm;
 public interface HashService {
     String NAME = "practice_HashService";
 
-    void run(Algorithm algorithm);
+    long run(Algorithm algorithm);
 }

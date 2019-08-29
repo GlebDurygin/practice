@@ -11,61 +11,49 @@ public class HashServiceBean implements HashService {
     protected static final String TEST_VALUE = "HELLO world! It is a test value";
 
     @Override
-    public void run(Algorithm algorithm) {
+    public long run(Algorithm algorithm) {
         switch (algorithm.getInfo()) {
             case HASH_GOST3411:
-                runHash(new GOST3411Digest());
-                break;
+                return runHash(new GOST3411Digest());
             case HASH_MD2:
-                runHash(new MD2Digest());
-                break;
+                return runHash(new MD2Digest());
             case HASH_MD4:
-                runHash(new MD4Digest());
-                break;
+                return runHash(new MD4Digest());
             case HASH_MD5:
-                runHash(new MD5Digest());
-                break;
+                return runHash(new MD5Digest());
             case HASH_RIPEMD128:
-                runHash(new RIPEMD128Digest());
-                break;
+                return runHash(new RIPEMD128Digest());
             case HASH_RIPEMD160:
-                runHash(new RIPEMD160Digest());
-                break;
+                return runHash(new RIPEMD160Digest());
             case HASH_RIPEMD256:
-                runHash(new RIPEMD256Digest());
-                break;
+                return runHash(new RIPEMD256Digest());
             case HASH_RIPEMD320:
-                runHash(new RIPEMD320Digest());
-                break;
+                return runHash(new RIPEMD320Digest());
             case HASH_SHA1:
-                runHash(new SHA1Digest());
-                break;
+                return runHash(new SHA1Digest());
             case HASH_SHA224:
-                runHash(new SHA224Digest());
-                break;
+                return runHash(new SHA224Digest());
             case HASH_SHA256:
-                runHash(new SHA256Digest());
-                break;
+                return runHash(new SHA256Digest());
             case HASH_SHA384:
-                runHash(new SHA384Digest());
-                break;
+                return runHash(new SHA384Digest());
             case HASH_SHA512:
-                runHash(new SHA512Digest());
-                break;
+                return runHash(new SHA512Digest());
             case HASH_TIGER:
-                runHash(new TigerDigest());
-                break;
+                return runHash(new TigerDigest());
             case HASH_WHIRLPOOL:
-                runHash(new WhirlpoolDigest());
-                break;
+                return runHash(new WhirlpoolDigest());
+            default:
+                return 0;
         }
     }
 
-    protected void runHash(Digest digest) {
+    protected long runHash(Digest digest) {
         byte[] input = TEST_VALUE.getBytes();
         for (int i = 0; i < 16000; i++) {
             input = processHash(input, digest);
         }
+        return Runtime.getRuntime().freeMemory();
     }
 
     protected byte[] processHash(byte[] input, Digest digest) {

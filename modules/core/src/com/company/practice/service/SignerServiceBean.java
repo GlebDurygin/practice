@@ -24,23 +24,20 @@ public class SignerServiceBean implements SignerService {
     protected static final String TEST_VALUE = "HELLO world! It is a test value";
 
     @Override
-    public void run(Algorithm algorithm) {
+    public long run(Algorithm algorithm) {
         switch (algorithm.getInfo()) {
             case SIGNING_DSA:
-                signingDSA();
-                break;
+                return signingDSA();
             case SIGNING_RSA:
-                signingRSA();
-                break;
+                return signingRSA();
             case SIGNING_ECDSA:
-                signingECDSA();
-                break;
+                return signingECDSA();
             default:
-                break;
+                return 0;
         }
     }
 
-    protected void signingDSA() {
+    protected long signingDSA() {
         DSAPrivateKeySpec PRIVATE_KEY = new DSAPrivateKeySpec(
                 // x
                 new BigInteger(
@@ -81,12 +78,14 @@ public class SignerServiceBean implements SignerService {
                                     PRIVATE_KEY.getQ(),
                                     PRIVATE_KEY.getG()))));
             signer.generateSignature(TEST_VALUE.getBytes());
+            return Runtime.getRuntime().freeMemory();
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 
-    protected void signingRSA() {
+    protected long signingRSA() {
         try {
             Digest digest = new SHA256Digest();
             digest.update(TEST_VALUE.getBytes(), 0, TEST_VALUE.getBytes().length);
@@ -97,12 +96,14 @@ public class SignerServiceBean implements SignerService {
                     new BigInteger("11", 16));
             signer.init(true, lwPubKey);
             signer.generateSignature();
+            return Runtime.getRuntime().freeMemory();
         } catch (CryptoException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 
-    protected void signingECDSA() {
+    protected long signingECDSA() {
         try {
             EllipticCurve curve = new EllipticCurve(
                     new ECFieldFp(new BigInteger("883423532389192164791648750360308885314476597252960362792450860609699839")), // q
@@ -127,8 +128,10 @@ public class SignerServiceBean implements SignerService {
 
             sgr.initSign(sKey);
             sgr.sign();
+            return Runtime.getRuntime().freeMemory();
         } catch (NoSuchAlgorithmException | SignatureException | NoSuchProviderException | InvalidKeySpecException | InvalidKeyException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 }

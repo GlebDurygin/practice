@@ -10,8 +10,23 @@
 * Цифровые подписи - генерация цифровой подписи и ее проверка;
 * Генераторы случайных чисел - генерирование случайных чисел пока для сгенерированного числа не превысит 1 мегабайт.
 
+## Измерение параметров для сравнения
+Операции измерения времени и объема затрачиваемой памяти выполняются 10 раз для получения усредненного результата.
+Данный процесс происходит в функции [ProcessServiceBean#runAlgorithm](modules/core/src/com/company/practice/service/ProcessServiceBean.java)
+```
+for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
+    long[] results = run(algorithm);
+    times[i] = results[0];
+    memories[i] = results[1];
+}
+double time = Arrays.stream(times).average().orElse(Double.NaN);
+double memory = Arrays.stream(memories).average().orElse(Double.NaN);
+algorithm.setTime(time);
+algorithm.setMemory(memory);
+```
+
 ### Измерение времени выполнения алгоритма
-Измерение времени выполнения алгоитма происходит в классе [ProcessServiceBean](modules/core/src/com/company/practice/service/ProcessServiceBean.java).
+Измерение времени выполнения алгоритма происходит в классе [ProcessServiceBean](modules/core/src/com/company/practice/service/ProcessServiceBean.java).
 ```
 long start = System.currentTimeMillis(); // текущее время в миллисекундах до запуска алгоритма
 /*
@@ -28,9 +43,10 @@ long memoryStart = Runtime.getRuntime().freeMemory(); // количество с
 /*
 Выполнение алгоритма
 */
-long memoryFinish = Runtime.getRuntime().freeMemory(); // количество свободной памяти после выполнения алгоритма
+long memoryFinish = runAlgorithm(algorithm); // количество свободной памяти после выполнения алгоритма
 algorithm.setMemory(Math.abs((double) ((memoryStart - memoryFinish) / 1024)));// объем затрачиваемой памяти в килоБайтах
-```
+``` 
+Количество свободной памяти, которое измеряется после выполнения алгоритма внутри функции выполнения, когда garbage collector еще не успел очистить ресурсы, которые были затрачены на выполнение функции.
 
 ### Главный экран
 ![](images/main-screen.PNG)

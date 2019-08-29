@@ -25,23 +25,20 @@ import java.security.spec.*;
 public class VerifierServiceBean implements VerifierService {
 
     @Override
-    public void run(Algorithm algorithm) {
+    public long run(Algorithm algorithm) {
         switch (algorithm.getInfo()) {
             case VERIFYING_DSA:
-                verifyingDSA();
-                break;
+                return verifyingDSA();
             case VERIFYING_RSA:
-                verifyingRSA();
-                break;
+                return verifyingRSA();
             case VERIFYING_ECDSA:
-                verifyingECDSA();
-                break;
+                return verifyingECDSA();
             default:
-                break;
+                return 0;
         }
     }
 
-    private void verifyingDSA() {
+    private long verifyingDSA() {
         try {
             DSAParameterSpec dsaParams = new DSAParameterSpec(
                     new BigInteger(
@@ -84,12 +81,14 @@ public class VerifierServiceBean implements VerifierService {
                     ((DERInteger) s.getObjectAt(1)).getValue()
             };
             signer.verifySignature(TEST_VALUE.getBytes(), sign[0], sign[1]);
+            return Runtime.getRuntime().freeMemory();
         } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | InvalidKeySpecException | NoSuchProviderException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 
-    private void verifyingRSA() {
+    private long verifyingRSA() {
         try {
             String TEST_VALUE = "HELLO world! It is a test value";
             Digest digest = new SHA256Digest();
@@ -102,12 +101,14 @@ public class VerifierServiceBean implements VerifierService {
             signer.init(true, lwPubKey);
             byte[] sign = signer.generateSignature();
             signer.verifySignature(sign);
+            return Runtime.getRuntime().freeMemory();
         } catch (CryptoException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 
-    private void verifyingECDSA() {
+    private long verifyingECDSA() {
         try {
             EllipticCurve curve = new EllipticCurve(
                     new ECFieldFp(new BigInteger("883423532389192164791648750360308885314476597252960362792450860609699839")), // q
@@ -139,8 +140,10 @@ public class VerifierServiceBean implements VerifierService {
 
             sgr.initVerify(vKey);
             sgr.verify(signed);
+            return Runtime.getRuntime().freeMemory();
         } catch (NoSuchAlgorithmException | SignatureException | NoSuchProviderException | InvalidKeySpecException | InvalidKeyException e) {
             e.printStackTrace();
         }
+        return Runtime.getRuntime().freeMemory();
     }
 }

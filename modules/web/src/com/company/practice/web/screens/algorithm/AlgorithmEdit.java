@@ -53,7 +53,7 @@ public class AlgorithmEdit extends StandardEditor<Algorithm> {
 
     protected void refreshItem() {
         Algorithm algorithm = algorithmDc.getItem();
-        Algorithm newAlgorithm = processService.run(algorithm);
+        Algorithm newAlgorithm = processService.runAlgorithm(algorithm);
         algorithm.setTime(newAlgorithm.getTime());
         algorithm.setMemory(newAlgorithm.getMemory());
     }

@@ -5,5 +5,7 @@ import com.company.practice.entity.Algorithm;
 public interface ProcessService {
     String NAME = "practice_ProcessService";
 
-    Algorithm run(Algorithm algorithm);
+    long[] run(Algorithm algorithm);
+
+    Algorithm runAlgorithm(Algorithm algorithm);
 }
